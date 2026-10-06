@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Deactivate Employee | Prime Athletes</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f6fa;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 100px auto;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,.05);
+        }
+
+        .warning {
+            color: #991b1b;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .button {
+            border: none;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .danger {
+            background: #dc2626;
+            color: white;
+        }
+
+        .cancel {
+            background: #e5e7eb;
+            color: #111827;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <h1>Deactivate Employee?</h1>
+
+        <p>
+            You are about to deactivate:
+        </p>
+
+        <h2>
+            {{ employee.user.get_full_name }}
+        </h2>
+
+        <p class="warning">
+            The employee will be marked as inactive.
+        </p>
+
+        <div class="buttons">
+
+            <form method="post">
+
+                {% csrf_token %}
+
+                <button
+                    type="submit"
+                    class="button danger"
+                >
+                    Yes, Deactivate
+                </button>
+
+            </form>
+
+            <a
+                href="{% url 'employees:detail' employee.id %}"
+                class="button cancel"
+            >
+                Cancel
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

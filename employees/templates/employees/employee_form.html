@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>{{ page_title }} | Prime Athletes</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f6fa;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 30px;
+        }
+
+        .header {
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            color: #6b7280;
+        }
+
+        .form-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,.05);
+        }
+
+        .section-title {
+            margin-top: 30px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .section-title:first-child {
+            margin-top: 0;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            margin-bottom: 7px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #d1d5db;
+            border-radius: 7px;
+            font-size: 14px;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        .help {
+            margin-top: 5px;
+            color: #6b7280;
+            font-size: 12px;
+        }
+
+        .errors {
+            color: #b91c1c;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .button {
+            display: inline-block;
+            text-decoration: none;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .primary {
+            background: #d4af37;
+            color: #111827;
+        }
+
+        .secondary {
+            background: #e5e7eb;
+            color: #111827;
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                padding: 15px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full {
+                grid-column: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <h1>{{ page_title }}</h1>
+
+        <p>
+            Manage Prime Athletes employee information.
+        </p>
+
+    </div>
+
+
+    <div class="form-card">
+
+        <form method="post">
+
+            {% csrf_token %}
+
+
+            {% if form.non_field_errors %}
+
+                <div class="errors">
+                    {{ form.non_field_errors }}
+                </div>
+
+            {% endif %}
+
+
+            <h2 class="section-title">
+                Account Information
+            </h2>
+
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label for="{{ form.username.id_for_label }}">
+                        Username
+                    </label>
+
+                    {{ form.username }}
+
+                    {% if form.username.help_text %}
+                        <div class="help">
+                            {{ form.username.help_text }}
+                        </div>
+                    {% endif %}
+
+                    <div class="errors">
+                        {{ form.username.errors }}
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="{{ form.role.id_for_label }}">
+                        System Role
+                    </label>
+
+                    {{ form.role }}
+
+                    <div class="errors">
+                        {{ form.role.errors }}
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="{{ form.first_name.id_for_label }}">
+                        First Name
+                    </label>
+
+                    {{ form.first_name }}
+
+                    <div class="errors">
+                        {{ form.first_name.errors }}
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="{{ form.last_name.id_for_label }}">
+                        Last Name
+                    </label>
+
+                    {{ form.last_name }}
+
+                    <div class="errors">
+                        {{ form.last_name.errors }}
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="{{ form.email.id_for_label }}">
+                        Email
+                    </label>
+
+                    {{ form.email }}
+
+                    <div class="errors">
+                        {{ form.email.errors }}
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="{{ form.phone.id_for_label }}">
+                        Phone
+                    </label>
+
+                    {{ form.phone }}
+
+                    <div class="errors">
+                        {{ form.phone.errors }}
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+
+    <label for="{{ form.password.id_for_label }}">
+        Password
+    </label>
+
+    {{ form.password }}
+
+    {% if form.password.help_text %}
+        <div class="help">
+            {{ form.password.help_text }}
+        </div>
+    {% endif %}
+
+    <div class="errors">
+        {{ form.password.errors }}
+    </div>
+
+</div>
+
+
+<div class="form-group">
+
+    <label for="{{ form.password_confirmation.id_for_label }}">
+        Confirm Password
+    </label>
+
+    {{ form.password_confirmation }}
+
+    <div class="errors">
+        {{ form.password_confirmation.errors }}
+    </div>
+
+</div>
+
+                
+
+            </div>
+
+
+            <h2 class="section-title">
+                Employment Information
+            </h2>
+
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label for="{{ form.employee_id.id_for_label }}">
+                        Employee ID
+                    </label>
+
+                    {{ form.employee_id }}
+
+                    <div class="errors">
+                        {{ form.employee_id.errors }}
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="{{ form.department.id_for_label }}">
+                        Department
+                    </label>
+
+                    {{ form.department }}
+
+                    <div class="errors">
+                        {{ form.department.errors }}
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="{{ form.position.id_for_label }}">
+                        Position
+                    </label>
+
+                    {{ form.position }}
+
+                    <div class="errors">
+                        {{ form.position.errors }}
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="{{ form.employment_status.id_for_label }}">
+                        Employment Status
+                    </label>
+
+                    {{ form.employment_status }}
+
+                    <div class="errors">
+                        {{ form.employment_status.errors }}
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="{{ form.date_joined.id_for_label }}">
+                        Date Joined
+                    </label>
+
+                    {{ form.date_joined }}
+
+                    <div class="errors">
+                        {{ form.date_joined.errors }}
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="{{ form.date_of_birth.id_for_label }}">
+                        Date of Birth
+                    </label>
+
+                    {{ form.date_of_birth }}
+
+                    <div class="errors">
+                        {{ form.date_of_birth.errors }}
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="{{ form.salary.id_for_label }}">
+                        Salary
+                    </label>
+
+                    {{ form.salary }}
+
+                    <div class="errors">
+                        {{ form.salary.errors }}
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <h2 class="section-title">
+                Additional Information
+            </h2>
+
+
+            <div class="form-grid">
+
+                <div class="form-group full">
+
+                    <label for="{{ form.address.id_for_label }}">
+                        Address
+                    </label>
+
+                    {{ form.address }}
+
+                    <div class="errors">
+                        {{ form.address.errors }}
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="{{ form.emergency_contact_name.id_for_label }}">
+                        Emergency Contact Name
+                    </label>
+
+                    {{ form.emergency_contact_name }}
+
+                    <div class="errors">
+                        {{ form.emergency_contact_name.errors }}
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="{{ form.emergency_contact_phone.id_for_label }}">
+                        Emergency Contact Phone
+                    </label>
+
+                    {{ form.emergency_contact_phone }}
+
+                    <div class="errors">
+                        {{ form.emergency_contact_phone.errors }}
+                    </div>
+
+                </div>
+
+
+                <div class="form-group full">
+
+                    <label for="{{ form.notes.id_for_label }}">
+                        Notes
+                    </label>
+
+                    {{ form.notes }}
+
+                    <div class="errors">
+                        {{ form.notes.errors }}
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="actions">
+
+                <button
+                    type="submit"
+                    class="button primary"
+                >
+                    {{ submit_text }}
+                </button>
+
+                <a
+                    href="{% url 'employees:list' %}"
+                    class="button secondary"
+                >
+                    Cancel
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

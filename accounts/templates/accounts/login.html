@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Login | Prime Athletes
+    </title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background: #111827;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 430px;
+            background: white;
+            border-radius: 14px;
+            padding: 35px;
+            box-shadow: 0 20px 50px rgba(0,0,0,.25);
+        }
+
+        .brand {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .brand h1 {
+            margin: 0;
+            color: #111827;
+            font-size: 27px;
+        }
+
+        .brand p {
+            color: #6b7280;
+            margin-top: 8px;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 7px;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #d4af37;
+        }
+
+        .button {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            background: #d4af37;
+            color: #111827;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            opacity: .9;
+        }
+
+        .errors {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .messages {
+            margin-bottom: 20px;
+        }
+
+        .message {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 25px;
+            color: #9ca3af;
+            font-size: 12px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="login-card">
+
+    <div class="brand">
+
+        <h1>
+            PRIME ATHLETES
+        </h1>
+
+        <p>
+            Business Management System
+        </p>
+
+    </div>
+
+
+    {% if messages %}
+
+        <div class="messages">
+
+            {% for message in messages %}
+
+                <div class="message">
+                    {{ message }}
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% endif %}
+
+
+    {% if form.non_field_errors %}
+
+        <div class="errors">
+
+            {{ form.non_field_errors }}
+
+        </div>
+
+    {% endif %}
+
+
+    <form method="post">
+
+        {% csrf_token %}
+
+
+        <div class="form-group">
+
+            <label for="{{ form.username.id_for_label }}">
+                Username
+            </label>
+
+            {{ form.username }}
+
+            {% if form.username.errors %}
+
+                <div class="errors">
+                    {{ form.username.errors }}
+                </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="{{ form.password.id_for_label }}">
+                Password
+            </label>
+
+            {{ form.password }}
+
+            {% if form.password.errors %}
+
+                <div class="errors">
+                    {{ form.password.errors }}
+                </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <button
+            type="submit"
+            class="button"
+        >
+            Login
+        </button>
+
+    </form>
+
+
+    <div class="footer">
+
+        Prime Athletes © 2026
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
